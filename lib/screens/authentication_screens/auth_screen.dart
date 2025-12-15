@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -223,23 +224,31 @@ class _AuthScreenState extends State<AuthScreen>
               mainAxisSize: MainAxisSize.min,
               children: [
                 // Rotating loading icon
-                Spin(
-                  infinite: true,
-                  duration: const Duration(seconds: 1),
-                  child: Container(
-                    width: 20.w,
-                    height: 20.w,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      gradient: LinearGradient(
-                        colors: [Colors.blueAccent, Colors.lightBlueAccent],
+                SizedBox(
+                  width: 18.w,
+                  height: 18.w,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      // Thin black circular progress
+                      SizedBox(
+                        width: 18.w,
+                        height: 18.w,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2, // Thinner line
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(Colors.black87),
+                          backgroundColor: Colors.transparent, // No background
+                        ),
                       ),
-                    ),
-                    child: Icon(
-                      Icons.medical_services,
-                      color: Colors.white,
-                      size: 10.w,
-                    ),
+
+                      // Simple black icon
+                      Icon(
+                        Iconsax.send_2,
+                        color: Colors.black87,
+                        size: 10.w,
+                      ),
+                    ],
                   ),
                 ),
                 SizedBox(height: 2.h),

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/services.dart';
 
@@ -152,23 +153,31 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen>
               mainAxisSize: MainAxisSize.min,
               children: [
                 // Rotating loading icon
-                Spin(
-                  infinite: true,
-                  duration: const Duration(seconds: 1),
-                  child: Container(
-                    width: 20.w,
-                    height: 20.w,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      gradient: LinearGradient(
-                        colors: [Colors.blueAccent, Colors.lightBlueAccent],
+                SizedBox(
+                  width: 18.w,
+                  height: 18.w,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      // Thin black circular progress
+                      SizedBox(
+                        width: 18.w,
+                        height: 18.w,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2, // Thinner line
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(Colors.black87),
+                          backgroundColor: Colors.transparent, // No background
+                        ),
                       ),
-                    ),
-                    child: Icon(
-                      Icons.fingerprint_rounded,
-                      color: Colors.white,
-                      size: 10.w,
-                    ),
+
+                      // Simple black icon
+                      Icon(
+                        Iconsax.verify,
+                        color: Colors.black87,
+                        size: 10.w,
+                      ),
+                    ],
                   ),
                 ),
                 SizedBox(height: 2.h),

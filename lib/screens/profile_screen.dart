@@ -1,3 +1,4 @@
+import 'package:clinic_app/screens/authentication_screens/auth_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
@@ -50,6 +51,14 @@ class ProfileScreen extends StatelessWidget {
                 color: Colors.grey[600],
               ),
             ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const AuthScreen(),
+                ));
+              },
+              child: Text("Auth Screen"),
+            )
           ],
         ),
       ),

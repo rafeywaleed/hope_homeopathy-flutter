@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:animate_do/animate_do.dart';
+import 'package:clinic_app/models/patient.dart';
+import 'package:clinic_app/widgets/patient_selection_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
@@ -83,6 +85,50 @@ class _HomeScreenState extends State<HomeScreen>
     if (mainScreenState != null) {
       mainScreenState.navigateToTab(index);
     }
+  }
+
+  void _showPatientSelectionForBooking() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(30),
+        ),
+      ),
+      backgroundColor: Colors.white,
+      builder: (context) => PatientSelectionSheet(
+        title: 'Book Appointment',
+        description: 'Select patient for booking appointment',
+        onPatientSelected: (patient) {
+          _navigateToBookingScreen(patient);
+        },
+      ),
+    );
+  }
+
+  void _navigateToBookingScreen(Patient patient) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          'Booking appointment for ${patient.fullName}',
+          style: GoogleFonts.inter(
+            fontWeight: FontWeight.w500,
+            fontSize: 14.sp,
+          ),
+        ),
+        backgroundColor: const Color(0xFF4CAF50).withOpacity(0.9),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+      ),
+    );
+
+    // TODO: Navigate to booking appointment screen
+    // Navigator.push(context, MaterialPageRoute(
+    //   builder: (context) => BookingAppointmentScreen(patient: patient),
+    // ));
   }
 
   @override
@@ -197,7 +243,7 @@ class _HomeScreenState extends State<HomeScreen>
             ),
             SizedBox(height: 0.3.h),
             Text(
-              'Patient Name',
+              'Abdul Rafey',
               style: GoogleFonts.inter(
                 fontSize: 18.sp,
                 fontWeight: FontWeight.w700,
@@ -389,9 +435,7 @@ class _HomeScreenState extends State<HomeScreen>
                   icon: Iconsax.calendar_add,
                   title: 'Book Appointment',
                   color: const Color(0xFF2196F3),
-                  onTap: () {
-                    // Handle book appointment
-                  },
+                  onTap: _showPatientSelectionForBooking,
                 ),
                 _buildQuickActionItem(
                   icon: Iconsax.calendar_tick,
