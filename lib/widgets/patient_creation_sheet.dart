@@ -357,10 +357,14 @@ class _AddPatientSheetState extends State<AddPatientSheet> {
         SizedBox(height: 1.h),
         GestureDetector(
           onTap: () async {
+            final DateTime now = DateTime.now();
             final DateTime? picked = await showDatePicker(
               context: context,
-              initialDate:
-                  DateTime.now().subtract(const Duration(days: 365 * 18)),
+              initialDate: DateTime(
+                now.year - 18,
+                now.month,
+                now.day,
+              ),
               firstDate: DateTime(1900),
               lastDate: DateTime.now(),
               builder: (context, child) {

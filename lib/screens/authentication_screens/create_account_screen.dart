@@ -66,9 +66,14 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>
   }
 
   Future<void> _selectDate() async {
+    final DateTime now = DateTime.now();
     final DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: DateTime.now().subtract(const Duration(days: 365 * 18)),
+      initialDate: DateTime(
+        now.year - 18,
+        now.month,
+        now.day,
+      ),
       firstDate: DateTime(1900),
       lastDate: DateTime.now(),
       builder: (context, child) {
